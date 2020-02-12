@@ -1,5 +1,5 @@
 # Grids and tiles
-Java RESTful Web Service for a creating and managing grids and tiles tiles.
+Java RESTful Web Service for creating and managing grids and tiles.
 
 ## 1. Install&Run
 
