@@ -1,4 +1,4 @@
-# webshop template
+# Grids and tiles
 Java RESTful Web Service for a creating and managing grids and tiles tiles.
 
 ## 1. Install&Run
@@ -25,15 +25,15 @@ Run the application:
 
 `java -jar build/libs/gridsandtiles-0.0.1-SNAPSHOT.jar`
 
-## 2. Get a grid:
+## 1. Get a grid:
 
 `curl -X GET http://localhost:8080/api/grid/1`
 
-## 3. Create grid (Windows style):
+## 2. Create grid (Windows style):
 
 `curl -X POST http://localhost:8080/api/grid/ -H "Content-Type: application/json" --data "{\"name\":\"teszt\",\"dimensions\":{\"width\":10,\"height\":5}}"`
 
-## 2. Get a tile:
+## 3. Get a tile:
 
 `curl -X GET http://localhost:8080/api/tile/1`
 
