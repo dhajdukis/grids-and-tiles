@@ -23,7 +23,7 @@ public class TileController {
         return tileService.retrieveTileById(id);
     }
 
-    @PutMapping(value = "/createTile", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public TileDto createTile(@Valid @RequestBody final TileDto tileDto) {
         try {
@@ -44,7 +44,7 @@ public class TileController {
     }
 
 
-    @PutMapping(value = "/editTile")
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public TileDto editTile(@Valid @RequestBody final TileDto tileDto) {
         try {
             return tileService.editTile(tileDto);

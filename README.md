@@ -39,7 +39,7 @@ Run the application:
 
 ## 4. Create tile (Windows style):
 
-`curl -X PUT http://localhost:8080/api/tile/createTile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"gridId\":1,\"position\":{\"xposition\": 2,\"yposition\": 2}}"`
+`curl -X POST http://localhost:8080/api/tile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"gridId\":1,\"position\":{\"xposition\": 2,\"yposition\": 2}}"`
 
 ## 5. Delete a tile:
 
@@ -47,7 +47,7 @@ Run the application:
 
 ## 6. Edit a tile (Windows style):
 
-`curl -X PUT http://localhost:8080/api/tile/editTile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"id\":1}"`
+`curl -X PUT http://localhost:8080/api/tile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"id\":1}"`
 
 ### Authors
 Daniel Hajdu-Kis - dhajdukis
