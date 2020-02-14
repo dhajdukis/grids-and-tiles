@@ -25,7 +25,6 @@ public class GridService extends AbstractService {
 
     @Transactional
     public GridDto createGrid(final GridDto gridDto) {
-        checkIfIdIsSet(gridDto.getId());
         checkIfDimensionIsNull(gridDto.getDimensions());
         checkDimensions(gridDto.getDimensions());
         final Grid grid = createModelMapper().map(gridDto, Grid.class);

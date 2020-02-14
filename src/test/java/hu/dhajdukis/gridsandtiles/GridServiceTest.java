@@ -32,7 +32,6 @@ class GridServiceTest {
     @Test
     void retrieveGridById() {
         final GridDto expectedGridDto = new GridDto();
-        expectedGridDto.setId(1L);
         expectedGridDto.setName("name");
         final DimensionsDto dimensionsDto = new DimensionsDto();
         dimensionsDto.setHeight(3);
@@ -51,22 +50,11 @@ class GridServiceTest {
 
         final GridDto resultGridDto = gridService.retrieveGridById(1L);
 
-        Assertions.assertEquals(resultGridDto.getId(), expectedGridDto.getId());
         Assertions.assertEquals(resultGridDto.getName(), expectedGridDto.getName());
         Assertions.assertEquals(resultGridDto.getDimensions().getHeight(),
                 expectedGridDto.getDimensions().getHeight());
         Assertions.assertEquals(resultGridDto.getDimensions().getWidth(),
                 expectedGridDto.getDimensions().getWidth());
-    }
-
-    @Test
-    void createGridIdIsSet() {
-        final GridDto gridDto = new GridDto();
-        gridDto.setId(1L);
-
-        final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> gridService.createGrid(gridDto));
-        Assertions.assertEquals("Id must be empty", exception.getMessage());
     }
 
     @Test

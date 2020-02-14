@@ -31,23 +31,23 @@ Run the application:
 
 ## 2. Create grid (Windows style):
 
-`curl -X POST http://localhost:8080/api/grid/ -H "Content-Type: application/json" --data "{\"name\":\"teszt\",\"dimensions\":{\"width\":10,\"height\":5}}"`
+`curl -X POST http://localhost:8080/api/grid/ -H "Content-Type: application/json" --data "{\"name\":\"test\",\"dimensions\":{\"width\":10,\"height\":5}}"`
 
 ## 3. Get a tile:
 
-`curl -X GET http://localhost:8080/api/tile/1`
+`curl -X GET http://localhost:8080/api/grid/1/api/tile/1`
 
 ## 4. Create tile (Windows style):
 
-`curl -X POST http://localhost:8080/api/tile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"gridId\":1,\"position\":{\"xposition\": 2,\"yposition\": 2}}"`
+`curl -X POST http://localhost:8080/api/grid/1/tile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"position\":{\"xposition\": 2,\"yposition\": 2}}"`
 
 ## 5. Delete a tile:
 
-`curl -X DELETE http://localhost:8080/api/tile/1`
+`curl -X DELETE http://localhost:8080/api/grid/1/tile/1`
 
 ## 6. Edit a tile (Windows style):
 
-`curl -X PUT http://localhost:8080/api/tile -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\",\"id\":1}"`
+`curl -X PUT http://localhost:8080/api/grid/1/tile/1 -H "Content-Type: application/json" --data "{\"url\":\"http://example.com\",\"title\":\"test\"}"`
 
 ### Authors
 Daniel Hajdu-Kis - dhajdukis

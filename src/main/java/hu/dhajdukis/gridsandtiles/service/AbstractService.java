@@ -9,10 +9,4 @@ public abstract class AbstractService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper;
     }
-
-    protected void checkIfIdIsSet(final Long id) {
-        if (id != null) {
-            throw new IllegalArgumentException("Id must be empty");
-        }
-    }
 }
