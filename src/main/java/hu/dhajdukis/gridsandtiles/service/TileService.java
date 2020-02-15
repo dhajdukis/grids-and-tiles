@@ -14,14 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TileService extends AbstractService {
     private final TileRepository tileRepository;
-    private final GridRepository gridRepository;
 
     public TileService(
             final TileRepository tileRepository,
             final GridRepository gridRepository
     ) {
+        super(gridRepository);
         this.tileRepository = tileRepository;
-        this.gridRepository = gridRepository;
     }
 
     @Transactional(readOnly = true)

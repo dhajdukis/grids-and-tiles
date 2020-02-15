@@ -11,10 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GridService extends AbstractService {
-    final GridRepository gridRepository;
 
     public GridService(final GridRepository gridRepository) {
-        this.gridRepository = gridRepository;
+        super(gridRepository);
     }
 
     @Transactional(readOnly = true)
