@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "/api/grid")
+@RequestMapping(value = "/api/grids")
 public class GridController {
     private final GridService gridService;
     private final TileService tileService;
@@ -37,12 +37,12 @@ public class GridController {
         }
     }
 
-    @GetMapping(value = "/{gridId}/tile/{tileId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{gridId}/tiles/{tileId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TileDto tile(@PathVariable("gridId") final Long gridId, @PathVariable("tileId") final Long tileId) {
         return tileService.retrieveTileById(tileId);
     }
 
-    @PostMapping(value = "/{gridId}/tile", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{gridId}/tiles", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public TileDto createTile(@PathVariable("gridId") final Long gridId, @Valid @RequestBody final TileDto tileDto) {
         try {
@@ -52,7 +52,7 @@ public class GridController {
         }
     }
 
-    @DeleteMapping(value = "/{gridId}/tile/{tileId}")
+    @DeleteMapping("/{gridId}/tiles/{tileId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTile(@PathVariable("gridId") final Long gridId, @PathVariable("tileId") final Long tileId) {
         try {
@@ -62,9 +62,11 @@ public class GridController {
         }
     }
 
-    @PutMapping(value = "/{gridId}/tile/{tileId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TileDto editTile(@PathVariable("gridId") final Long gridId, @PathVariable("tileId") final Long tileId,
-                            @Valid @RequestBody final TileDto tileDto) {
+    @PutMapping(value = "/{gridId}/tiles/{tileId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TileDto editTile(
+            @PathVariable("gridId") final Long gridId, @PathVariable("tileId") final Long tileId,
+            @Valid @RequestBody final TileDto tileDto
+    ) {
         try {
             return tileService.editTile(gridId, tileId, tileDto);
         } catch (final IllegalArgumentException e) {

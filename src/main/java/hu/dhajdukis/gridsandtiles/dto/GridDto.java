@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GridDto {
+    private Long id;
     @Valid
     private DimensionsDto dimensions;
     @NotNull(message = "Please provide name")
