@@ -15,5 +15,4 @@ public class TileDto {
     private String title;
     @URL
     private String url;
-    private Long GridId;
 }

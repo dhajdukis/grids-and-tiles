@@ -40,7 +40,6 @@ public class TileServiceTest {
         expectedTileDto.setId(1L);
         expectedTileDto.setTitle("name");
         expectedTileDto.setUrl("http://hkd.com");
-        expectedTileDto.setGridId(1L);
         final PositionDto positionDto = new PositionDto();
         positionDto.setXposition(3);
         positionDto.setYposition(4);
@@ -70,8 +69,6 @@ public class TileServiceTest {
                 expectedTileDto.getPosition().getXposition());
         Assertions.assertEquals(tileService.retrieveTileById(1L).getPosition().getYposition(),
                 expectedTileDto.getPosition().getYposition());
-        Assertions.assertEquals(tileService.retrieveTileById(1L).getGridId(),
-                expectedTileDto.getGridId());
     }
 
     @Test
@@ -80,7 +77,7 @@ public class TileServiceTest {
         tileDto.setId(1L);
 
         final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> tileService.createTile(tileDto));
+                () -> tileService.createTile(1L, tileDto));
         Assertions.assertEquals("Id must be empty", exception.getMessage());
     }
 
@@ -89,7 +86,7 @@ public class TileServiceTest {
         final TileDto tileDto = new TileDto();
 
         final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> tileService.createTile(tileDto));
+                () -> tileService.createTile(1L, tileDto));
         Assertions.assertEquals("Postion parameters should not be null", exception.getMessage());
     }
 
@@ -100,13 +97,12 @@ public class TileServiceTest {
         positionDto.setXposition(3);
         positionDto.setYposition(4);
         tileDto.setPosition(positionDto);
-        tileDto.setGridId(2L);
 
-        when(gridRepository.findById(2L)).thenReturn(Optional.empty());
+        when(gridRepository.findById(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> tileService.createTile(tileDto));
-        Assertions.assertEquals("Grid with the given id: 2 does not exist", exception.getMessage());
+                () -> tileService.createTile(1L, tileDto));
+        Assertions.assertEquals("Grid with the given id: 1 does not exist", exception.getMessage());
     }
 
     @Test
@@ -116,7 +112,6 @@ public class TileServiceTest {
         positionDto.setXposition(10);
         positionDto.setYposition(9);
         tileDto.setPosition(positionDto);
-        tileDto.setGridId(1L);
 
         final Grid grid = new Grid();
         grid.setId(1L);
@@ -127,7 +122,7 @@ public class TileServiceTest {
         when(gridRepository.findById(1L)).thenReturn(optionalGrid);
 
         final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> tileService.createTile(tileDto));
+                () -> tileService.createTile(1L, tileDto));
         Assertions.assertEquals("Position (10x9) is outside of the grid's dimensions: 9x2", exception.getMessage());
     }
 
@@ -138,7 +133,6 @@ public class TileServiceTest {
         positionDto.setXposition(10);
         positionDto.setYposition(9);
         tileDto.setPosition(positionDto);
-        tileDto.setGridId(1L);
 
         final Grid grid = new Grid();
         grid.setId(1L);
@@ -152,7 +146,7 @@ public class TileServiceTest {
         when(tileRepository.findByGridIdAndXpositionAndYposition(1L, 10, 9)).thenReturn(optionalTile);
 
         final Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> tileService.createTile(tileDto));
+                () -> tileService.createTile(1L, tileDto));
         Assertions.assertEquals("The position is taken", exception.getMessage());
     }
 
@@ -163,7 +157,6 @@ public class TileServiceTest {
         positionDto.setXposition(10);
         positionDto.setYposition(9);
         tileDto.setPosition(positionDto);
-        tileDto.setGridId(1L);
         tileDto.setTitle("test");
         tileDto.setUrl("http://hkd.com");
 
@@ -176,7 +169,7 @@ public class TileServiceTest {
         when(gridRepository.findById(1L)).thenReturn(optionalGrid);
         when(tileRepository.findByGridIdAndXpositionAndYposition(1L, 10, 9)).thenReturn(Optional.empty());
 
-        final TileDto resultTileDto = tileService.createTile(tileDto);
+        final TileDto resultTileDto = tileService.createTile(1L, tileDto);
 
         Assertions.assertEquals(resultTileDto.getTitle(), tileDto.getTitle());
         Assertions.assertEquals(resultTileDto.getUrl(), tileDto.getUrl());
@@ -185,5 +178,4 @@ public class TileServiceTest {
         Assertions.assertEquals(resultTileDto.getPosition().getYposition(),
                 tileDto.getPosition().getYposition());
     }
-
 }

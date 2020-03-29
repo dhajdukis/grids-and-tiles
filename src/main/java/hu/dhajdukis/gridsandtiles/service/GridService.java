@@ -11,10 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GridService extends AbstractService {
-    final GridRepository gridRepository;
 
     public GridService(final GridRepository gridRepository) {
-        this.gridRepository = gridRepository;
+        super(gridRepository);
     }
 
     @Transactional(readOnly = true)
@@ -25,7 +24,6 @@ public class GridService extends AbstractService {
 
     @Transactional
     public GridDto createGrid(final GridDto gridDto) {
-        checkIfIdIsSet(gridDto.getId());
         checkIfDimensionIsNull(gridDto.getDimensions());
         checkDimensions(gridDto.getDimensions());
         final Grid grid = createModelMapper().map(gridDto, Grid.class);
